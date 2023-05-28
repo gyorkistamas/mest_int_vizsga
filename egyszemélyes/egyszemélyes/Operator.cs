@@ -6,13 +6,23 @@ using System.Threading.Tasks;
 
 namespace egyszemélyes
 {
-    internal class Operator
+    public class Operator
     {
         private int index;
         private Direction direction;
 
         public int Index { get => index; set => index = value; }
         public Direction Direction { get => direction; set => direction = value; }
+        public RowOrColumn RowOrColumn 
+        { 
+            get
+            {
+                if (direction == Direction.Left || direction == Direction.Right)
+                    return RowOrColumn.Row;
+                else
+                    return RowOrColumn.Col;
+            }
+        }
 
         public Operator(int index, Direction direction)
         {
@@ -25,13 +35,13 @@ namespace egyszemélyes
             if (this.Index < 0)
                 return false;
 
-            if (this.Direction == Direction.Left || this.Direction == Direction.Right)
+            if (this.RowOrColumn == RowOrColumn.Row)
             {
-                return this.Index < State.TABLE_X_LENGTH;
+                return this.Index < State.TABLE_ROW_COUNT;
             }
             else
             {
-                return this.Index < State.TABLE_Y_LENGTH;
+                return this.Index < State.TABLE_COL_COUNT;
             }
         }
 
@@ -40,30 +50,65 @@ namespace egyszemélyes
         {
             State newState = state.Clone() as State;
 
-            switch(this.Direction)
-            {
-                case Direction.Left:
-                case Direction.Right:
-                    break;
-
-                case Direction.Up: 
-                case Direction.Down:
-                    break;
-            }
-
+            if (this.RowOrColumn == RowOrColumn.Row)
+                ShiftHorizontal(newState);
+            else
+                ShiftVertical(newState);
 
             return newState;
         }
 
         private void ShiftHorizontal(State state)
         {
+            if (this.Direction == Direction.Left)
+            {
+                int firstValue = state.Table[this.Index, 0];
 
+                for (int i = 1; i < State.TABLE_COL_COUNT; i++)
+                {
+                    state.Table[this.index, i - 1] = state.Table[this.index, i];
+                }
+
+                state.Table[this.index, State.TABLE_COL_COUNT - 1] = firstValue;
+            }
+            else
+            {
+                int firstValue = state.Table[this.Index, State.TABLE_COL_COUNT - 1];
+
+                for (int i = State.TABLE_COL_COUNT - 2; i >= 0; i--)
+                {
+                    state.Table[this.index, i + 1] = state.Table[this.index, i];
+                }
+
+                state.Table[this.index, 0] = firstValue;
+            }
         }
 
 
-        private void ShoftVertical(State state)
+        private void ShiftVertical(State state)
         {
+            if (this.Direction == Direction.Up)
+            {
+                int firstValue = state.Table[0, this.Index];
 
+                for (int i = 0; i < State.TABLE_ROW_COUNT - 1; i++)
+                {
+                    state.Table[i, this.Index] = state.Table[i + 1, this.index];
+                }
+
+                state.Table[State.TABLE_ROW_COUNT - 1, this.Index] = firstValue;
+            }
+            else
+            {
+                int firstValue = state.Table[State.TABLE_ROW_COUNT - 1, this.Index];
+
+                for (int i = State.TABLE_ROW_COUNT - 2; i >= 0; i--)
+                {
+                    state.Table[i + 1, this.Index] = state.Table[i, this.Index];
+                }
+
+                state.Table[0, this.Index] = firstValue;
+            }
         }
     }
 }

@@ -4,7 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(new State());
+            State state = new State();
+            //Solver solver = new BackTrack(state);
+            Solver solver = new BreadthFirst(state);
             Console.ReadLine();
         }
     }
