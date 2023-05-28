@@ -24,7 +24,7 @@ namespace egyszemelyes_2
             closedNodes.Clear();
             path = null;
             openNodes.Enqueue(new Node(state, null));
-            while (openNodes.Count > 0)
+            while (openNodes.Count > 0 && path == null)
             {
                 currentNode = openNodes.Dequeue();
                 closedNodes.Add(currentNode);
