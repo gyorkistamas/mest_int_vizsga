@@ -9,7 +9,7 @@ namespace egyszemelyes_2
     internal class BackTrack : Solver
     {
         Stack<Node> route = new Stack<Node>();
-        int depthLimit = 50;
+        int depthLimit = 30;
         Node currentNode;
         Node path;
         State state;
@@ -48,7 +48,10 @@ namespace egyszemelyes_2
             {
                 path = route.Peek();
                 Display(path.ToString());
-                Console.WriteLine($"Steps: {path.Depth}");
+                Console.WriteLine($"\nSteps: {path.Depth}");
+
+                Console.WriteLine("\nPress enter to exit!");
+                Console.ReadLine();
             }
             else
             {
@@ -60,9 +63,12 @@ namespace egyszemelyes_2
         {
             string[] states = text.Split("DIVIDER");
 
+            Console.WriteLine("Solution found!");
+            Console.WriteLine("Press enter to cycle through the states!");
 
             foreach (string state in states)
             {
+                Console.ReadLine();
                 Console.Clear();
                 foreach (char item in state)
                 {
@@ -100,11 +106,6 @@ namespace egyszemelyes_2
 
                     Console.Write(item);
                 }
-
-                Console.WriteLine("\nPress enter to see the next state");
-
-                Console.ReadLine();
-
             }
         }
     }
