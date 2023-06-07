@@ -40,16 +40,25 @@ namespace ketszemelyes_2
                     Console.WriteLine("Player won!");
                     break;
                 }
-                else if (currentState.IsTargetState(State.CPU_COLOR))
+                if (currentState.IsTargetState(State.CPU_COLOR))
                 {
                     Console.Clear();
                     DisplayTable();
                     Console.WriteLine("CPU WON!");
                     break;
                 }
+                if (currentState.IsDraw())
+                {
+                    Console.Clear();
+                    DisplayTable();
+                    Console.WriteLine("DRAW!");
+                    break;
+                }
 
 
                 DisplayTable();
+
+                Console.WriteLine("\nComputer thinking...");
 
                 currentState = NextState();
 
@@ -62,11 +71,18 @@ namespace ketszemelyes_2
                     Console.WriteLine("Player won!");
                     break;
                 }
-                else if (currentState.IsTargetState(State.CPU_COLOR))
+                if (currentState.IsTargetState(State.CPU_COLOR))
                 {
                     Console.Clear();
                     DisplayTable();
                     Console.WriteLine("CPU WON!");
+                    break;
+                }
+                if (currentState.IsDraw())
+                {
+                    Console.Clear();
+                    DisplayTable();
+                    Console.WriteLine("DRAW!");
                     break;
                 }
             }
@@ -98,7 +114,8 @@ namespace ketszemelyes_2
 
             if (node.Depth > maxDepth                              ||
                 node.State.IsTargetState(State.PLAYER_COLOR) ||
-                node.State.IsTargetState(State.CPU_COLOR))
+                node.State.IsTargetState(State.CPU_COLOR)    ||
+                node.State.IsDraw())
             {
                 return;
             }
@@ -132,7 +149,7 @@ namespace ketszemelyes_2
                 char toY;
                 do
                 {
-                    Console.Write("ToX: ");
+                    Console.Write("\nToX: ");
                 } while (!int.TryParse(Console.ReadLine(), out toX));
 
                 Console.Write("ToY: ");
