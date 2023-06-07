@@ -68,12 +68,17 @@ namespace ketszemelyes_2
 
             if (this.State.IsTargetState(State.CPU_COLOR))
             {
-                return 30;
+                return 50;
             }
 
             if (this.state.IsTargetState(State.PLAYER_COLOR))
             {
-                return -30;
+                return -50;
+            }
+
+            if (this.state.IsDraw())
+            {
+                return 0;
             }
 
             int weight = 0;
