@@ -25,7 +25,9 @@ namespace egyszemelyes_2
             StringBuilder sr = new StringBuilder();
 
             sr.AppendLine($"| {(PossibleDirections.Contains(Direction.UPLEFT) ? Program.UPLEFTARROW : '_')} {(PossibleDirections.Contains(Direction.UP) ? Program.UPARROW : '_')} {(PossibleDirections.Contains(Direction.UPRIGHT) ? Program.UPRIGHTARROW : '_')} |");
+
             sr.AppendLine($"| {(PossibleDirections.Contains(Direction.LEFT) ? Program.LEFTARROW : '_')} {shape.Write()} {(PossibleDirections.Contains(Direction.RIGHT) ? Program.RIGHTARROW : '_')} |");
+
             sr.Append($"| {(PossibleDirections.Contains(Direction.DOWNLEFT) ? Program.DOWNLEFTARROW : '_')} {(PossibleDirections.Contains(Direction.DOWN) ? Program.DOWNARROW : '_')} {(PossibleDirections.Contains(Direction.DOWNRIGHT) ? Program.DOWNRIGHTARROW : '_')} |");
 
             return sr.ToString();

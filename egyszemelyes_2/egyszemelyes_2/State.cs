@@ -10,13 +10,29 @@ namespace egyszemelyes_2
     {
         public static Cell[,] table =
         {
-            { new Cell(new List<Direction>{Direction.DOWN, Direction.DOWNRIGHT }, Shape.NONE), new Cell(new List<Direction>{ Direction.DOWN}, Shape.SQUARE),new Cell(new List<Direction>{Direction.LEFT, Direction.RIGHT}, Shape.NONE),new Cell(new List<Direction>{ Direction.DOWNLEFT}, Shape.CIRCLE),new Cell(new List<Direction>{Direction.LEFT }, Shape.NONE)},
+            { new Cell(new List<Direction>{Direction.DOWN, Direction.DOWNRIGHT }, Shape.NONE),
+              new Cell(new List<Direction>{ Direction.DOWN}, Shape.SQUARE),
+              new Cell(new List<Direction>{Direction.LEFT, Direction.RIGHT}, Shape.NONE),
+              new Cell(new List<Direction>{ Direction.DOWNLEFT}, Shape.CIRCLE),
+              new Cell(new List<Direction>{Direction.LEFT }, Shape.NONE)},
 
-            { new Cell(new List<Direction>{Direction.UP, Direction.DOWN }, Shape.SQUARE), new Cell(new List<Direction>{ Direction.DOWN, Direction.UPRIGHT}, Shape.SQUARE),new Cell(new List<Direction>{ }, Shape.GOAL),new Cell(new List<Direction>{Direction.LEFT, Direction.DOWNLEFT }, Shape.NONE),new Cell(new List<Direction>{Direction.LEFT, Direction.DOWN }, Shape.NONE)},
+            { new Cell(new List<Direction>{Direction.UP, Direction.DOWN }, Shape.SQUARE), 
+              new Cell(new List<Direction>{ Direction.DOWN, Direction.UPRIGHT}, Shape.SQUARE),
+              new Cell(new List<Direction>{ }, Shape.GOAL),
+              new Cell(new List<Direction>{Direction.LEFT, Direction.DOWNLEFT }, Shape.NONE),
+              new Cell(new List<Direction>{Direction.LEFT, Direction.DOWN }, Shape.NONE)},
 
-            { new Cell(new List<Direction>{Direction.UP, Direction.DOWN }, Shape.NONE), new Cell(new List<Direction>{Direction.RIGHT }, Shape.NONE),new Cell(new List<Direction>{Direction.UPLEFT, Direction.DOWNRIGHT }, Shape.NONE),new Cell(new List<Direction>{Direction.UP, Direction.DOWNLEFT, Direction.DOWNRIGHT }, Shape.NONE),new Cell(new List<Direction>{Direction.UP }, Shape.NONE )},
+            { new Cell(new List<Direction>{Direction.UP, Direction.DOWN }, Shape.NONE),
+              new Cell(new List<Direction>{Direction.RIGHT }, Shape.NONE),
+              new Cell(new List<Direction>{Direction.UPLEFT, Direction.DOWNRIGHT }, Shape.NONE),
+              new Cell(new List<Direction>{Direction.UP, Direction.DOWNLEFT, Direction.DOWNRIGHT }, Shape.NONE),
+              new Cell(new List<Direction>{Direction.UP }, Shape.NONE )},
 
-            { new Cell(new List<Direction>{ Direction.UP, Direction.RIGHT}, Shape.NONE), new Cell(new List<Direction>{Direction.UPRIGHT, Direction.RIGHT }, Shape.NONE),new Cell(new List<Direction>{Direction.RIGHT, Direction.DOWNRIGHT }, Shape.NONE),new Cell(new List<Direction>{Direction.UPLEFT, Direction.DOWNRIGHT}, Shape.NONE),new Cell(new List<Direction>{Direction.UP, }, Shape.CIRCLE)},
+            { new Cell(new List<Direction>{ Direction.UP, Direction.RIGHT}, Shape.NONE),
+              new Cell(new List<Direction>{Direction.UPRIGHT, Direction.RIGHT }, Shape.NONE),
+              new Cell(new List<Direction>{Direction.RIGHT, Direction.DOWNRIGHT }, Shape.NONE),
+              new Cell(new List<Direction>{Direction.UPLEFT, Direction.DOWNRIGHT}, Shape.NONE),
+              new Cell(new List<Direction>{Direction.UP, }, Shape.CIRCLE)},
 
             { new Cell(new List<Direction>{ Direction.RIGHT}, Shape.SQUARE), new Cell(new List<Direction>{ Direction.LEFT, Direction.RIGHT}, Shape.NONE),new Cell(new List<Direction>{Direction.LEFT, Direction.UPRIGHT }, Shape.START),new Cell(new List<Direction>{ Direction.UP, Direction.UPRIGHT}, Shape.NONE),new Cell(new List<Direction>{Direction.UP}, Shape.CIRCLE)},
 
@@ -52,13 +68,14 @@ namespace egyszemelyes_2
 
         public override bool Equals(object? obj)
         {
-            if (obj is null || obj is not State) return false;
+            if (obj is not null && obj is State other)
+            {
+                return other.X == this.X &&
+                       other.Y == this.Y &&
+                       other.MoveCount == this.MoveCount;
+            }
 
-            State other = obj as State;
-
-            return other.X == this.X &&
-                   other.Y == this.Y &&
-                   other.MoveCount == this.MoveCount;
+            return false;
         }
 
         public override string ToString()
