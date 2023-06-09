@@ -9,7 +9,7 @@
 
             //Console.WriteLine(asd);
 
-            MiniMax solver = new MiniMax(asd, 4);
+            MiniMax solver = new MiniMax(asd, 3);
 
             solver.Play();
 
