@@ -9,7 +9,7 @@ namespace egyszemelyes_2
     internal class BackTrack : Solver
     {
         Stack<Node> route = new Stack<Node>();
-        int depthLimit = 30;
+        int depthLimit = 26;
         Node currentNode;
         Node path;
         State state;

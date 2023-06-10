@@ -94,7 +94,7 @@ namespace egyszemelyes_2
 
                         if (j == 1 && X == i && Y == k)
                         {
-                            line = line.Remove(GetIndexForInsert(k), 1).Insert(GetIndexForInsert(k), "P");
+                            line = line.Remove(GetIndexForInsert(k), 1).Insert( GetIndexForInsert(k), "P");
                         }
                     }
                     sb.AppendLine(line.ToString());
